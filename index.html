@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hack East  Cybersecurity Rising from the East</title>
+  <meta name="description" content="Hack East is the pan-regional cybersecurity platform for the Eastern hemisphere — connecting security talent, research, and innovation across Southeast Asia, East Asia, and the Middle East." />
+  <meta name="keywords" content="Asia cybersecurity, Southeast Asia hacking, East Asia security, Middle East cyber, pan-regional infosec, APAC cybersecurity, Eastern hemisphere security talent" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Hack East — Cybersecurity Rising from the East" />
+  <meta property="og:description" content="The Eastern hemisphere produces the world's most talented hackers. Hack East is where they connect." />
+  <meta property="og:url" content="https://hackeast.com" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://hackeast.com" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void:        #050408;
+      --deep:        #08060e;
+      --panel:       #0e0b18;
+      --panel-2:     #130f20;
+      --border:      rgba(255,255,255,0.07);
+      --crimson:     #c41230;
+      --crimson-bright:#e0203c;
+      --crimson-dim: #8a0c22;
+      --crimson-glow:rgba(196,18,48,0.1);
+      --amber:       #f59e0b;
+      --jade:        #10b981;
+      --white:       #f5f0f8;
+      --muted:       rgba(245,240,248,0.55);
+      --soft:        rgba(245,240,248,0.32);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--deep);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── BANNER ── */
+    #offer-banner {
+      background: var(--void);
+      color: var(--soft);
+      text-align: center;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.76rem; letter-spacing: 0.03em; line-height: 1.5;
+      border-bottom: 1px solid var(--border);
+      position: relative; z-index: 200;
+    }
+    #offer-banner a {
+      color: var(--amber); text-decoration: none; font-weight: 500;
+      border-bottom: 1px solid rgba(245,158,11,0.3);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    #offer-banner a:hover { color: #fbbf24; border-color: #fbbf24; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(8,6,14,0.95);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 1px 28px rgba(0,0,0,0.7); }
+
+    .nav-logo {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.4rem; font-weight: 600;
+      letter-spacing: 0.02em; color: var(--white);
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--crimson-bright); font-style: italic; }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--white); background: var(--crimson);
+      border: none; padding: 0.62rem 1.4rem; border-radius: 3px;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--crimson-bright); transform: translateY(-1px);
+      box-shadow: 0 4px 18px rgba(196,18,48,0.4);
+    }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-drawer {
+      display: none; position: fixed; inset: 0;
+      background: rgba(5,4,8,0.98); z-index: 99;
+      flex-direction: column; align-items: center;
+      justify-content: center; gap: 2.5rem; padding: 2rem;
+    }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a {
+      font-family: 'Noto Serif', serif;
+      font-size: 2.2rem; font-weight: 300; color: var(--white);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-drawer a:hover { color: var(--crimson-bright); }
+    .nav-drawer .drawer-cta {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--white); background: var(--crimson);
+      padding: 1rem 2.5rem; border-radius: 3px; margin-top: 0.5rem;
+    }
+    .drawer-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; color: var(--soft);
+      font-size: 1.8rem; cursor: pointer; line-height: 1;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative; width: 100%; height: 100svh;
+      min-height: 560px; display: flex;
+      align-items: center; justify-content: center;
+      overflow: hidden; background: var(--void);
+    }
+    #hero-fallback {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, #1a0008 0%, var(--void) 70%);
+      z-index: 0;
+    }
+    #hero-bg-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 40%; z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(5,4,8,0.72) 0%,
+        rgba(5,4,8,0.38) 38%,
+        rgba(5,4,8,0.92) 100%
+      );
+      z-index: 2;
+    }
+    /* Rising sun motif */
+    .hero-sun {
+      position: absolute;
+      bottom: -8%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: min(700px, 90vw);
+      height: min(350px, 45vw);
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0.06;
+    }
+    .hero-sun svg { width: 100%; height: 200%; }
+
+    .hero-content {
+      position: relative; z-index: 3; text-align: center;
+      color: var(--white); max-width: 860px; padding: 0 1.5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp 1s 0.3s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .hero-title {
+      font-family: 'Noto Serif', serif;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      font-weight: 300; line-height: 1.04;
+      letter-spacing: -0.01em; margin-bottom: 1.6rem;
+      opacity: 0; animation: fadeUp 1.1s 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--crimson-bright); }
+    .hero-sub {
+      font-size: clamp(0.92rem, 2.2vw, 1.05rem); font-weight: 300;
+      line-height: 1.78; color: var(--muted);
+      max-width: 520px; margin: 0 auto 2.2rem;
+      opacity: 0; animation: fadeUp 1.1s 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 1.1s 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .btn-primary {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--white); background: var(--crimson);
+      border: none; padding: 0.95rem 2rem; border-radius: 3px;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--crimson-bright); transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(196,18,48,0.45);
+    }
+    .btn-ghost {
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--white); background: transparent;
+      border: 1px solid var(--border);
+      padding: 0.95rem 2rem; border-radius: 3px;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--amber); background: rgba(245,158,11,0.08); transform: translateY(-2px);
+    }
+    .hero-scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%); z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 0.45rem;
+      color: var(--soft); font-size: 0.62rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      animation: scrollFloat 2.5s ease-in-out infinite;
+    }
+    @keyframes scrollFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(7px); }
+    }
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, rgba(196,18,48,0.7), transparent);
+    }
+
+    /* ── SECTION COMMON ── */
+    .section-label {
+      font-size: 0.67rem; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--crimson-bright); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Noto Serif', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 300; line-height: 1.14;
+      color: var(--white); margin-bottom: 1.4rem;
+    }
+    .section-title em { font-style: italic; color: var(--crimson-bright); }
+    .section-body {
+      font-size: 0.97rem; font-weight: 300;
+      line-height: 1.85; color: var(--muted); max-width: 520px;
+    }
+
+    /* ── REGIONS ── */
+    #regions-wrap {
+      padding: 6rem 4rem; background: var(--panel);
+      border-top: 1px solid var(--border);
+    }
+    #regions {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .region-cards { display: flex; flex-direction: column; gap: 1.5px; }
+    .region-card {
+      display: grid; grid-template-columns: 64px 1fr;
+      align-items: stretch; border: 1px solid var(--border);
+      overflow: hidden; background: var(--panel-2); transition: background 0.3s;
+    }
+    .region-card:hover { background: rgba(196,18,48,0.06); }
+    .region-flag {
+      background: var(--void); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 1.6rem; padding: 1.6rem 0;
+    }
+    .region-body { padding: 1.4rem 1.6rem; }
+    .region-body h3 {
+      font-family: 'Noto Serif', serif;
+      font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem;
+    }
+    .region-body p {
+      font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.65;
+    }
+    .east-callout {
+      background: linear-gradient(135deg, var(--crimson-dim) 0%, var(--void) 100%);
+      border: 1px solid rgba(196,18,48,0.2);
+      border-radius: 3px; padding: 2.2rem; margin-top: 1.5px;
+    }
+    .east-callout .big-word {
+      font-family: 'Noto Serif', serif;
+      font-size: 3.4rem; font-weight: 300; font-style: italic;
+      line-height: 1; color: var(--amber); margin-bottom: 0.5rem;
+    }
+    .east-callout p {
+      font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.68;
+    }
+
+    /* ── PROGRAMS ── */
+    #programs {
+      background: var(--void); padding: 7rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+    .prog-inner { max-width: 1200px; margin: 0 auto; }
+    .prog-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 4rem;
+    }
+    .prog-card {
+      background: var(--panel);
+      border: 1px solid rgba(196,18,48,0.1);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s; position: relative; overflow: hidden;
+    }
+    .prog-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--crimson-dim), var(--crimson-bright));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .prog-card:hover::before { transform: scaleX(1); }
+    .prog-card:hover { background: rgba(196,18,48,0.05); }
+    .prog-region {
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--amber); display: block; margin-bottom: 1rem;
+    }
+    .prog-card h3 {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.4rem; font-weight: 400; margin-bottom: 0.8rem; color: var(--white);
+    }
+    .prog-card p {
+      font-size: 0.86rem; font-weight: 300; line-height: 1.75; color: var(--muted);
+    }
+
+    /* ── TALENT MAP ── */
+    #talent-wrap {
+      padding: 7rem 4rem; background: var(--panel);
+      border-top: 1px solid var(--border);
+    }
+    #talent {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+
+    .talent-stats { display: flex; gap: 0; flex-direction: column; }
+    .t-row {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 2rem;
+      padding: 1.4rem 0; border-bottom: 1px solid var(--border);
+    }
+    .t-row:first-child { border-top: 1px solid var(--border); }
+    .t-country {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.85rem; font-weight: 400; color: var(--muted);
+    }
+    .t-country .flag { font-size: 1.1rem; }
+    .t-rank {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.6rem; font-weight: 300;
+      color: var(--white); line-height: 1; text-align: right;
+    }
+    .t-rank span { font-size: 0.8rem; font-weight: 300; color: var(--crimson-bright); margin-left: 0.3rem; }
+
+    .talent-callout-stats { display: flex; gap: 2rem; margin-top: 2rem; }
+    .tc-stat { flex: 1; text-align: center; }
+    .tc-num {
+      font-family: 'Noto Serif', serif;
+      font-size: 2.6rem; font-weight: 300;
+      color: var(--crimson-bright); line-height: 1;
+    }
+    .tc-num.amber { color: var(--amber); }
+    .tc-label {
+      font-size: 0.68rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--soft); margin-top: 0.35rem;
+    }
+    .tc-divider { width: 1px; background: var(--border); align-self: stretch; }
+
+    /* ── SECTORS ── */
+    #sectors {
+      background: linear-gradient(135deg, var(--panel-2) 0%, var(--void) 100%);
+      padding: 7rem 4rem; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    #sectors .section-title { margin: 0 auto 1.4rem; }
+    #sectors .section-body  { color: var(--muted); margin: 0 auto 3.5rem; text-align: center; }
+    .sectors-grid {
+      display: flex; justify-content: center;
+      flex-wrap: wrap; gap: 1rem; max-width: 900px; margin: 0 auto;
+    }
+    .sector-tag {
+      background: rgba(196,18,48,0.06);
+      border: 1px solid rgba(196,18,48,0.18);
+      color: var(--muted); font-size: 0.8rem;
+      letter-spacing: 0.06em; padding: 0.65rem 1.3rem; border-radius: 3px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .sector-tag:hover {
+      background: rgba(196,18,48,0.12); border-color: var(--crimson-bright); color: var(--crimson-bright);
+    }
+
+    /* ── CTA ── */
+    #cta-section {
+      background: var(--deep); text-align: center; padding: 7rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    #cta-section .section-title { margin: 0 auto 1rem; }
+    #cta-section .section-body  { margin: 0 auto 2.5rem; text-align: center; }
+    .waitlist-form {
+      display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;
+    }
+    .waitlist-form input {
+      font-family: 'Figtree', sans-serif; font-size: 0.9rem;
+      padding: 0.95rem 1.4rem;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 3px; width: 280px; max-width: 100%;
+      color: var(--white); outline: none; transition: border-color 0.2s;
+    }
+    .waitlist-form input::placeholder { color: var(--soft); }
+    .waitlist-form input:focus { border-color: rgba(196,18,48,0.4); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--void); padding: 4rem 4rem 3rem; border-top: 1px solid var(--border); }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-brand .nav-logo { display: block; margin-bottom: 1rem; }
+    footer p, footer a {
+      font-size: 0.79rem; font-weight: 300; line-height: 1.85;
+      color: var(--soft); text-decoration: none;
+    }
+    footer a:hover { color: var(--amber); }
+    .footer-col h4 {
+      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(245,240,248,0.38); margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-bottom {
+      max-width: 1200px; margin: 2.5rem auto 0;
+      border-top: 1px solid var(--border); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.7rem; flex-wrap: wrap; gap: 0.5rem;
+    }
+
+    .fade-up {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      nav { padding: 1.1rem 2rem; }
+      #regions-wrap, #talent-wrap, #programs, #sectors { padding: 5rem 2rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      nav { padding: 1rem 1.5rem; }
+      #hero { min-height: 500px; }
+      .hero-scroll-hint { display: none; }
+      .hero-sun { display: none; }
+      #regions { grid-template-columns: 1fr; gap: 3rem; }
+      #talent   { grid-template-columns: 1fr; gap: 3rem; }
+      .prog-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; max-width: 300px; text-align: center; }
+      .waitlist-form { flex-direction: column; align-items: center; }
+      .waitlist-form input { width: 100%; max-width: 320px; }
+      .talent-callout-stats { gap: 1rem; }
+      .tc-num { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="offer-banner">
+    hackeast.com is available for acquisition.&ensp;·&ensp;
+    <a href="https://hacklb.com" target="_blank" rel="noopener noreferrer">Browse our domain portfolio →</a>
+  </div>
+
+  <nav id="main-nav">
+    <a class="nav-logo" href="/">Hack<span>East</span></a>
+    <ul class="nav-links">
+      <li><a href="#regions-wrap">The Regions</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#talent-wrap">Talent</a></li>
+    </ul>
+    <a class="nav-cta" href="#cta-section">Join the East</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Navigation menu">
+    <button class="drawer-close" id="drawer-close" aria-label="Close menu">✕</button>
+    <a href="#regions-wrap" onclick="closeDrawer()">The Regions</a>
+    <a href="#programs"     onclick="closeDrawer()">Programs</a>
+    <a href="#talent-wrap"  onclick="closeDrawer()">Talent</a>
+    <a href="#cta-section"  onclick="closeDrawer()" class="drawer-cta">Join the East</a>
+  </div>
+
+  <section id="hero" aria-label="Hack East — Cybersecurity Rising from the East">
+    <div id="hero-fallback"></div>
+    <img
+      id="hero-bg-img"
+      src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1800&q=80&auto=format&fit=crop"
+      alt="Asian city skyline at dawn representing the Eastern hemisphere's rising cybersecurity influence"
+    />
+    <div class="hero-overlay"></div>
+    <!-- Rising sun SVG motif -->
+    <div class="hero-sun" aria-hidden="true">
+      <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <circle cx="300" cy="300" r="240" stroke="#c41230" stroke-width="1"/>
+        <circle cx="300" cy="300" r="180" stroke="#c41230" stroke-width="0.6" stroke-dasharray="4 8"/>
+        <circle cx="300" cy="300" r="120" stroke="#c41230" stroke-width="0.4"/>
+        <g stroke="#c41230" stroke-width="0.5">
+          <line x1="300" y1="60" x2="300" y2="0"/>
+          <line x1="420" y1="90" x2="470" y2="44"/>
+          <line x1="180" y1="90" x2="130" y2="44"/>
+          <line x1="480" y1="210" x2="540" y2="180"/>
+          <line x1="120" y1="210" x2="60" y2="180"/>
+          <line x1="460" y1="170" x2="520" y2="130"/>
+          <line x1="140" y1="170" x2="80" y2="130"/>
+          <line x1="380" y1="75" x2="420" y2="20"/>
+          <line x1="220" y1="75" x2="180" y2="20"/>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Pan-Regional Cybersecurity Platform</p>
+      <h1 class="hero-title">Security rising<br>from the <em>East.</em></h1>
+      <p class="hero-sub">Southeast Asia, East Asia, and the Middle East produce some of the world's most brilliant security researchers. Hack East is the platform that connects them — and the organisations that need them — across the Eastern hemisphere.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#cta-section">Join the East</a>
+        <a class="btn-ghost"   href="#regions-wrap">The Regions</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div id="regions-wrap">
+    <section id="regions">
+      <div class="fade-up">
+        <p class="section-label">The Regions</p>
+        <h2 class="section-title">One platform.<br><em>Three hemispheres.</em></h2>
+        <p class="section-body">From Manila to Manama, from Seoul to Singapore — Hack East spans the world's fastest-growing digital economies and the security talent that protects them. The Eastern hemisphere is not catching up with the West. In many domains, it is leading.</p>
+      </div>
+      <div class="fade-up" style="transition-delay:0.1s;">
+        <div class="region-cards">
+          <div class="region-card">
+            <div class="region-flag">🌏</div>
+            <div class="region-body">
+              <h3>Southeast Asia</h3>
+              <p>Philippines, Singapore, Vietnam, Thailand, Indonesia — a region of 700M people building digital infrastructure at extraordinary speed.</p>
+            </div>
+          </div>
+          <div class="region-card">
+            <div class="region-flag">🌐</div>
+            <div class="region-body">
+              <h3>East Asia</h3>
+              <p>South Korea, Japan, Taiwan — world-leading semiconductor and tech sectors with some of the most rigorous security research cultures on earth.</p>
+            </div>
+          </div>
+          <div class="region-card">
+            <div class="region-flag">🕌</div>
+            <div class="region-body">
+              <h3>Middle East</h3>
+              <p>UAE, Saudi Arabia, Qatar, Jordan — a region investing massively in digital transformation with acute awareness of the cyber risks that come with it.</p>
+            </div>
+          </div>
+          <div class="region-card">
+            <div class="region-flag">🏔️</div>
+            <div class="region-body">
+              <h3>South &amp; Central Asia</h3>
+              <p>India, Pakistan, Bangladesh — emerging powerhouses of software engineering talent increasingly specialising in cybersecurity at scale.</p>
+            </div>
+          </div>
+        </div>
+        <div class="east-callout">
+          <div class="big-word">4.7 billion.</div>
+          <p>The population of the Eastern hemisphere — the largest untapped pool of cybersecurity talent on the planet, and the fastest-growing market for security services.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="programs" aria-label="Hack East Programs">
+    <div class="prog-inner">
+      <div class="fade-up" style="max-width:600px;">
+        <p class="section-label">Programs</p>
+        <h2 class="section-title">Built for the<br><em>Eastern context</em></h2>
+        <p class="section-body">Hack East programmes are designed for the regulatory environments, threat landscapes, and talent pipelines specific to each region — not Western content localised after the fact.</p>
+      </div>
+      <div class="prog-grid">
+        <article class="prog-card fade-up">
+          <span class="prog-region">Southeast Asia</span>
+          <h3>ASEAN Cyber Cup</h3>
+          <p>The flagship CTF competition for Southeast Asian nations — contested by university teams from all 10 ASEAN member states each year.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.1s">
+          <span class="prog-region">East Asia</span>
+          <h3>Korean &amp; Japanese Red Teams</h3>
+          <p>Advanced offensive security programmes developed with South Korean KITRI and Japanese IPA partners — for the specific threat actors facing these markets.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.2s">
+          <span class="prog-region">Middle East</span>
+          <h3>Arab Security League</h3>
+          <p>An Arabic-language cybersecurity training and competition platform — developing regional talent without requiring English proficiency as a barrier to entry.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.05s">
+          <span class="prog-region">Pan-Regional</span>
+          <h3>Hack East Summit</h3>
+          <p>An annual gathering bringing together security professionals, researchers, and government representatives from across the Eastern hemisphere.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.15s">
+          <span class="prog-region">Industry</span>
+          <h3>Eastern Talent Exchange</h3>
+          <p>A talent placement platform connecting Hack East community members with security roles at regional governments and multinational enterprises operating in the East.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.25s">
+          <span class="prog-region">Research</span>
+          <h3>Asia-Pacific Threat Intel</h3>
+          <p>Shared threat intelligence feeds specific to Eastern hemisphere threat actors, APT groups, and regional attack patterns — unavailable from Western-centric vendors.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div id="talent-wrap">
+    <section id="talent">
+      <div class="fade-up">
+        <p class="section-label">The Talent</p>
+        <h2 class="section-title">Where the world's<br>best <em>hackers</em> come from</h2>
+        <p class="section-body" style="margin-bottom:2rem;">CTF leaderboards don't lie. Year after year, Eastern hemisphere teams dominate the world's most competitive cybersecurity competitions. Hack East connects that talent to opportunity — without requiring them to leave.</p>
+        <div class="talent-callout-stats">
+          <div class="tc-stat">
+            <div class="tc-num">7 of 10</div>
+            <div class="tc-label">Top CTF teams, Eastern</div>
+          </div>
+          <div class="tc-divider"></div>
+          <div class="tc-stat">
+            <div class="tc-num amber">4.7B</div>
+            <div class="tc-label">Population represented</div>
+          </div>
+          <div class="tc-divider"></div>
+          <div class="tc-stat">
+            <div class="tc-num">1</div>
+            <div class="tc-label">Platform connecting it</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:0.12s;">
+        <div class="talent-stats">
+          <div class="t-row">
+            <span class="t-country"><span class="flag">🇰🇷</span>South Korea</span>
+            <span class="t-rank">Pwndbg, DDP, MMM <span>top teams</span></span>
+          </div>
+          <div class="t-row">
+            <span class="t-country"><span class="flag">🇵🇭</span>Philippines</span>
+            <span class="t-rank">PWNPH, DEFCON-PH <span>rising fast</span></span>
+          </div>
+          <div class="t-row">
+            <span class="t-country"><span class="flag">🇸🇬</span>Singapore</span>
+            <span class="t-rank">NUS Greyhats <span>elite tier</span></span>
+          </div>
+          <div class="t-row">
+            <span class="t-country"><span class="flag">🇯🇵</span>Japan</span>
+            <span class="t-rank">TSG, m1z0r3 <span>world class</span></span>
+          </div>
+          <div class="t-row">
+            <span class="t-country"><span class="flag">🇮🇳</span>India</span>
+            <span class="t-rank">bi0s, Team Shakti <span>scale &amp; depth</span></span>
+          </div>
+          <div class="t-row">
+            <span class="t-country"><span class="flag">🇦🇪</span>UAE &amp; Gulf</span>
+            <span class="t-rank">CyberTalents <span>emerging force</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="sectors" aria-label="Sectors Hack East Serves">
+    <p class="section-label">Where We Operate</p>
+    <h2 class="section-title">Every sector driving<br>the <em>Eastern economy</em></h2>
+    <p class="section-body">Hack East talent is deployed across the full breadth of the Eastern hemisphere's digital economy — wherever the pace of growth creates security obligation.</p>
+    <div class="sectors-grid fade-up">
+      <span class="sector-tag">Banking &amp; Islamic Finance</span>
+      <span class="sector-tag">Smart Government</span>
+      <span class="sector-tag">Semiconductor &amp; Hardware</span>
+      <span class="sector-tag">Gaming &amp; Entertainment</span>
+      <span class="sector-tag">Logistics &amp; Supply Chain</span>
+      <span class="sector-tag">Telecoms &amp; Mobile</span>
+      <span class="sector-tag">Healthcare &amp; BioTech</span>
+      <span class="sector-tag">Energy &amp; Utilities</span>
+      <span class="sector-tag">Defence &amp; Intelligence</span>
+    </div>
+  </section>
+
+  <section id="cta-section" aria-label="Join Hack East">
+    <p class="section-label">Join Hack East</p>
+    <h2 class="section-title" style="max-width:560px; margin:0 auto 1rem;">The East is <em>rising.</em><br>Are you with it?</h2>
+    <p class="section-body">Join Hack East and connect with the security community shaping the digital future of the world's most populated hemisphere.</p>
+    <form class="waitlist-form" onsubmit="handleWaitlist(event)">
+      <input type="email" id="email-input" placeholder="you@email.com" required />
+      <button type="submit" class="btn-primary">Join the East</button>
+    </form>
+    <p id="waitlist-msg" style="margin-top:1.2rem; font-size:0.84rem; color:var(--amber); min-height:1.2em;"></p>
+    <p style="font-size:0.72rem; color:var(--soft); margin-top:0.5rem;">No spam. Unsubscribe anytime.</p>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="nav-logo" href="/">Hack<span style="color:var(--amber)">East</span></a>
+        <p>Cybersecurity rising from the East.<br>SE Asia · East Asia · Middle East.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Regions</a></li>
+          <li><a href="#">Programs</a></li>
+          <li><a href="#">Research</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="#">ASEAN Cyber Cup</a></li>
+          <li><a href="#">Hack East Summit</a></li>
+          <li><a href="#">Talent Exchange</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 HackEast. All rights reserved.</p>
+      <p>hackeast.com — cybersecurity from the Eastern hemisphere.</p>
+    </div>
+  </footer>
+
+  <script>
+    var hamburger = document.getElementById('hamburger');
+    var drawer = document.getElementById('nav-drawer');
+    var drawerClose = document.getElementById('drawer-close');
+    hamburger.addEventListener('click', function () {
+      var isOpen = drawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    drawerClose.addEventListener('click', closeDrawer);
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+    window.addEventListener('scroll', function () {
+      document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(function (el) { observer.observe(el); });
+    function handleWaitlist(e) {
+      e.preventDefault();
+      document.getElementById('waitlist-msg').textContent = '✓ Welcome to Hack East. We\'ll be in touch soon.';
+      document.getElementById('email-input').value = '';
+    }
+  </script>
+</body>
+</html>
